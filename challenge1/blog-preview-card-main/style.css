@@ -40,12 +40,12 @@ height: 100vh;
 body{
   background-color:  hsl(47, 88%, 63%);
 }
-h6{
+.head h6{
   background-color: hsl(47, 88%, 63%);
   padding: 3px;
   width: 45px;
 }
-.text h5 img{
+.text h6 img{
   height: 27px;
   width: auto;
   vertical-align: middle;
