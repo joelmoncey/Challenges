@@ -1,0 +1,135 @@
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import logo from "../../assets/images/Designer.png";
+import {
+  FiSearch,
+  FiHeart,
+  FiUser,
+  FiShoppingCart,
+  FiMenu,
+  FiX,
+} from "react-icons/fi";
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const navLinks = [
+    "Home",
+    "Shop",
+    "Men",
+    "Women",
+    "Sneakers",
+    "Accessories",
+  ];
+
+  return (
+    <header className="sticky top-0 z-50 bg-white shadow-sm">
+      {/* Top Navbar */}
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 cursor-pointer">
+            <span className="flex h-14 w-24 items-center">
+              <img src={logo} alt="Efactory" className="h-full w-full object-contain" />
+            </span>
+            <h1 className="text-2xl font-bold text-[#673AB7]" >
+              Efactory
+            </h1>
+          </Link>
+
+          {/* Search Bar - Desktop */}
+          <div className="hidden md:flex items-center w-full max-w-md mx-8">
+            <div className="relative w-full">
+              <input
+                type="text"
+                placeholder="Search products..."
+                className="w-full border border-gray-300 rounded-lg py-2 pl-10 pr-4 outline-none focus:border-[#673AB7]"
+              />
+              <FiSearch className="absolute left-3 top-3 text-gray-500" />
+            </div>
+          </div>
+
+          {/* Desktop Icons */}
+          <div className="hidden md:flex items-center gap-5">
+            <button className="hover:text-[#673AB7] transition duration-300">
+              <FiHeart size={22} />
+            </button>
+
+            <button className="hover:text-[#673AB7] transition duration-300">
+              <FiUser size={22} />
+            </button>
+
+            <Link to="/cart" className="relative hover:text-[#673AB7] transition duration-300" aria-label="Cart">
+              <FiShoppingCart size={22} />
+
+              <span className="absolute -top-2 -right-2 bg-[#00BFA5] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                2
+              </span>
+            </Link>
+          </div>
+
+          {/* Mobile Buttons */}
+          <div className="flex md:hidden items-center gap-4">
+            <Link to="/cart" className="relative" aria-label="Cart">
+              <FiShoppingCart size={24} />
+
+              <span className="absolute -top-2 -right-2 bg-[#00BFA5] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                2
+              </span>
+            </Link>
+
+            <button onClick={() => setIsOpen(!isOpen)}>
+              {isOpen ? <FiX size={28} /> : <FiMenu size={28} />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop Navigation */}
+      <div className="hidden md:block border-t">
+        <div className="max-w-7xl mx-auto px-4">
+          <ul className="flex items-center gap-8 h-14">
+            {navLinks.map((link) => (
+              <li
+                key={link}
+                className="cursor-pointer font-medium text-gray-700 hover:text-[#673AB7] transition duration-300"
+              >
+                {link === "Home" ? <Link to="/">{link}</Link> : link === "Shop" ? <Link to="/shop">{link}</Link> : link}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden border-t bg-white">
+          <ul className="flex flex-col p-4 gap-4">
+            {navLinks.map((link) => (
+              <li
+                key={link}
+                className="cursor-pointer font-medium text-gray-700 hover:text-[#673AB7]"
+              >
+                {link === "Home" ? <Link to="/">{link}</Link> : link === "Shop" ? <Link to="/shop">{link}</Link> : link}
+              </li>
+            ))}
+          </ul>
+
+          {/* Mobile Search */}
+          <div className="px-4 pb-4">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search products..."
+                className="w-full border border-gray-300 rounded-lg py-2 pl-10 pr-4 outline-none focus:border-[#673AB7]"
+              />
+              <FiSearch className="absolute left-3 top-3 text-gray-500" />
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+};
+
+export default Navbar;
