@@ -23,46 +23,46 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm">
+    <header className="sticky top-0 z-50 bg-[#FFFFFF] shadow-sm">
       {/* Top Navbar */}
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-16 min-w-0 items-center justify-between gap-3">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 cursor-pointer">
-            <span className="flex h-14 w-24 items-center">
+          <Link to="/" className="flex min-w-0 shrink-0 items-center gap-2 cursor-pointer">
+            <span className="flex h-14 w-20 items-center sm:w-24">
               <img src={logo} alt="Efactory" className="h-full w-full object-contain" />
             </span>
-            <h1 className="text-2xl font-bold text-[#673AB7]" >
+            <h1 className="hidden text-2xl font-bold text-[#673AB7] sm:block">
               Efactory
             </h1>
           </Link>
 
           {/* Search Bar - Desktop */}
-          <div className="hidden md:flex items-center w-full max-w-md mx-8">
+          <div className="hidden min-w-0 flex-1 items-center mx-4 md:flex lg:mx-8">
             <div className="relative w-full">
               <input
                 type="text"
                 placeholder="Search products..."
-                className="w-full border border-gray-300 rounded-lg py-2 pl-10 pr-4 outline-none focus:border-[#673AB7]"
+                className="w-full border border-[#9575CD] rounded-lg py-2 pl-10 pr-4 outline-none focus:border-[#673AB7]"
               />
-              <FiSearch className="absolute left-3 top-3 text-gray-500" />
+              <FiSearch className="absolute left-3 top-3 text-[#4B5563]" />
             </div>
           </div>
 
           {/* Desktop Icons */}
           <div className="hidden md:flex items-center gap-5">
-            <button className="hover:text-[#673AB7] transition duration-300">
+            <button className="hover:text-[#673AB7] transition duration-300" aria-label="Wishlist">
               <FiHeart size={22} />
             </button>
 
-            <button className="hover:text-[#673AB7] transition duration-300">
+            <button className="hover:text-[#673AB7] transition duration-300" aria-label="Account">
               <FiUser size={22} />
             </button>
 
             <Link to="/cart" className="relative hover:text-[#673AB7] transition duration-300" aria-label="Cart">
               <FiShoppingCart size={22} />
 
-              <span className="absolute -top-2 -right-2 bg-[#00BFA5] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+              <span className="absolute -top-2 -right-2 bg-[#00BFA5] text-[#FFFFFF] text-xs w-5 h-5 rounded-full flex items-center justify-center">
                 2
               </span>
             </Link>
@@ -73,7 +73,7 @@ const Navbar = () => {
             <Link to="/cart" className="relative" aria-label="Cart">
               <FiShoppingCart size={24} />
 
-              <span className="absolute -top-2 -right-2 bg-[#00BFA5] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+              <span className="absolute -top-2 -right-2 bg-[#00BFA5] text-[#FFFFFF] text-xs w-5 h-5 rounded-full flex items-center justify-center">
                 2
               </span>
             </Link>
@@ -92,7 +92,7 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <li
                 key={link}
-                className="cursor-pointer font-medium text-gray-700 hover:text-[#673AB7] transition duration-300"
+                className="cursor-pointer font-medium text-[#4B5563] hover:text-[#673AB7] transition duration-300"
               >
                 {link === "Home" ? <Link to="/">{link}</Link> : link === "Shop" ? <Link to="/shop">{link}</Link> : link}
               </li>
@@ -103,12 +103,12 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden border-t bg-white">
+        <div className="md:hidden border-t border-[#9575CD] bg-[#FFFFFF]">
           <ul className="flex flex-col p-4 gap-4">
             {navLinks.map((link) => (
               <li
                 key={link}
-                className="cursor-pointer font-medium text-gray-700 hover:text-[#673AB7]"
+                className="cursor-pointer font-medium text-[#4B5563] hover:text-[#673AB7]"
               >
                 {link === "Home" ? <Link to="/">{link}</Link> : link === "Shop" ? <Link to="/shop">{link}</Link> : link}
               </li>
@@ -121,9 +121,9 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder="Search products..."
-                className="w-full border border-gray-300 rounded-lg py-2 pl-10 pr-4 outline-none focus:border-[#673AB7]"
+                className="w-full border border-[#9575CD] rounded-lg py-2 pl-10 pr-4 outline-none focus:border-[#673AB7]"
               />
-              <FiSearch className="absolute left-3 top-3 text-gray-500" />
+              <FiSearch className="absolute left-3 top-3 text-[#4B5563]" />
             </div>
           </div>
         </div>

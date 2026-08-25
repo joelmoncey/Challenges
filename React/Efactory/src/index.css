@@ -1,1 +1,30 @@
 @import "tailwindcss";
+
+:root {
+	--brand-primary: #673AB7;
+	--brand-primary-light: #9575CD;
+	--brand-primary-dark: #512DA8;
+	--brand-secondary: #00BFA5;
+	--brand-secondary-light: #33D0B8;
+	--brand-secondary-dark: #008573;
+	--background-default: #F3F4F6;
+	--background-paper: #FFFFFF;
+	--text-primary: #111827;
+	--text-secondary: #4B5563;
+	--warning: #FFB300;
+}
+
+html,
+body,
+#root {
+	min-height: 100%;
+}
+
+img {
+	max-width: 100%;
+}
+
+button,
+a {
+	max-width: 100%;
+}
