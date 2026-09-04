@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import ProductCard from '../components/product/ProductCard';
 import { products } from '../data/products';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 const Home = () => {
+  const productsSectionRef = useRef(null);
+
+  const handleShopNow = () => {
+    productsSectionRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#F3F4F6]">
       
@@ -48,14 +57,12 @@ const Home = () => {
                   {/* CTA Buttons */}
                   <div className="mt-5 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:justify-center lg:justify-start">
                     <div className="w-full rounded-md shadow sm:w-auto">
-                      <button className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-[#FFFFFF] bg-[#00BFA5] hover:bg-[#008573] transition duration-150 ease-in-out md:py-4 md:text-lg">
+                      <button type="button" onClick={handleShopNow} className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-[#FFFFFF] bg-[#00BFA5] hover:bg-[#008573] transition duration-150 ease-in-out md:py-4 md:text-lg">
                         Shop Now
                       </button>
                     </div>
                     <div className="w-full sm:w-auto">
-                      <button className="w-full flex items-center justify-center px-8 py-3 border border-[#9575CD] text-base font-medium rounded-md text-[#4B5563] bg-[#FFFFFF] hover:bg-[#F3F4F6] transition duration-150 ease-in-out md:py-4 md:text-lg">
-                        View Lookbook
-                      </button>
+                      
                     </div>
                   </div>
                   
@@ -89,7 +96,7 @@ const Home = () => {
 
 
         {/* ================= PRODUCT GRID SECTION ================= */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+        <section ref={productsSectionRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
           
           {/* Section Header */}
           <div className="flex items-center justify-between mb-10">

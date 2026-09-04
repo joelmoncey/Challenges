@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/Designer.png";
+import { useCartStore } from "../../store/cartStore";
 import {
   FiSearch,
   FiHeart,
@@ -12,6 +13,16 @@ import {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+  const totalItems = useCartStore((state) => state.getTotalItems());
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const searchTerm = search.trim();
+    navigate(searchTerm ? `/shop?search=${encodeURIComponent(searchTerm)}` : "/shop");
+    setIsOpen(false);
+  };
 
   const navLinks = [
     "Home",
@@ -38,16 +49,21 @@ const Navbar = () => {
           </Link>
 
           {/* Search Bar - Desktop */}
-          <div className="hidden min-w-0 flex-1 items-center mx-4 md:flex lg:mx-8">
+          <form className="hidden min-w-0 flex-1 items-center mx-4 md:flex lg:mx-8" onSubmit={handleSearch}>
             <div className="relative w-full">
               <input
                 type="text"
                 placeholder="Search products..."
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                aria-label="Search products"
                 className="w-full border border-[#9575CD] rounded-lg py-2 pl-10 pr-4 outline-none focus:border-[#673AB7]"
               />
-              <FiSearch className="absolute left-3 top-3 text-[#4B5563]" />
+              <button type="submit" aria-label="Submit search" className="absolute left-3 top-3 text-[#4B5563]">
+                <FiSearch />
+              </button>
             </div>
-          </div>
+          </form>
 
           {/* Desktop Icons */}
           <div className="hidden md:flex items-center gap-5">
@@ -63,7 +79,7 @@ const Navbar = () => {
               <FiShoppingCart size={22} />
 
               <span className="absolute -top-2 -right-2 bg-[#00BFA5] text-[#FFFFFF] text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                2
+                {totalItems}
               </span>
             </Link>
           </div>
@@ -74,7 +90,7 @@ const Navbar = () => {
               <FiShoppingCart size={24} />
 
               <span className="absolute -top-2 -right-2 bg-[#00BFA5] text-[#FFFFFF] text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                2
+                {totalItems}
               </span>
             </Link>
 
@@ -116,16 +132,21 @@ const Navbar = () => {
           </ul>
 
           {/* Mobile Search */}
-          <div className="px-4 pb-4">
+          <form className="px-4 pb-4" onSubmit={handleSearch}>
             <div className="relative">
               <input
                 type="text"
                 placeholder="Search products..."
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                aria-label="Search products"
                 className="w-full border border-[#9575CD] rounded-lg py-2 pl-10 pr-4 outline-none focus:border-[#673AB7]"
               />
-              <FiSearch className="absolute left-3 top-3 text-[#4B5563]" />
+              <button type="submit" aria-label="Submit search" className="absolute left-3 top-3 text-[#4B5563]">
+                <FiSearch />
+              </button>
             </div>
-          </div>
+          </form>
         </div>
       )}
     </header>
