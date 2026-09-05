@@ -1,7 +1,13 @@
 import AppRoutes from "./routes/AppRoutes";
+import RouteLoader from "./components/ui/RouteLoader";
 
 function App() {
-  return <AppRoutes />;
+  return (
+    <>
+      <RouteLoader />
+      <AppRoutes />
+    </>
+  );
 }
 
 export default App;
