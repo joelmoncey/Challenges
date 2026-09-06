@@ -2,17 +2,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCartStore } from '../../store/cartStore';
+import { useToast } from '../ui/Toast';
 
 const ProductCard = ({ product }) => {
   const { title, price, rating, image, category } = product;
   
   // Pull the addToCart function from our Zustand store
   const addToCart = useCartStore((state) => state.addToCart);
+  const { showToast } = useToast();
 
   const handleAddToCart = () => {
     addToCart(product);
-    // Optional: Add a toast notification here later!
-    console.log(`Added ${title} to global cart store!`);
+    showToast(`${title} added to your cart.`, 'success');
   };
 
   return (

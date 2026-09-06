@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/Designer.png";
 import { useCartStore } from "../../store/cartStore";
+import { useToast } from "../ui/Toast";
 import {
   FiSearch,
   FiHeart,
@@ -16,11 +17,13 @@ const Navbar = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const totalItems = useCartStore((state) => state.getTotalItems());
+  const { showToast } = useToast();
 
   const handleSearch = (event) => {
     event.preventDefault();
     const searchTerm = search.trim();
     navigate(searchTerm ? `/shop?search=${encodeURIComponent(searchTerm)}` : "/shop");
+    showToast(searchTerm ? `Searching for "${searchTerm}".` : "Showing all products.", "info");
     setIsOpen(false);
   };
 
@@ -67,11 +70,11 @@ const Navbar = () => {
 
           {/* Desktop Icons */}
           <div className="hidden md:flex items-center gap-5">
-            <button className="hover:text-[#673AB7] transition duration-300" aria-label="Wishlist">
+            <button type="button" onClick={() => showToast("Wishlist is coming soon.", "info")} className="hover:text-[#673AB7] transition duration-300" aria-label="Wishlist">
               <FiHeart size={22} />
             </button>
 
-            <button className="hover:text-[#673AB7] transition duration-300" aria-label="Account">
+            <button type="button" onClick={() => showToast("Account access is coming soon.", "info")} className="hover:text-[#673AB7] transition duration-300" aria-label="Account">
               <FiUser size={22} />
             </button>
 

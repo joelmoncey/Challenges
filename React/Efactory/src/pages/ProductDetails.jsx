@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { products } from '../data/products';
 import { useCartStore } from '../store/cartStore';
 import Navbar from '../components/layout/Navbar';
+import { useToast } from '../components/ui/Toast';
 
 const ProductDetails = () => {
   // 1. Extract the dynamic ID from the URL (e.g., /product/3 -> id = "3")
@@ -14,6 +15,7 @@ const ProductDetails = () => {
 
   // Access our Zustand store action
   const addToCart = useCartStore((state) => state.addToCart);
+  const { showToast } = useToast();
 
   // If the user types a random ID that doesn't exist, show an error state
   if (!product) {
@@ -100,7 +102,10 @@ const ProductDetails = () => {
               <div className="mt-10">
                 <button
                   type="button"
-                  onClick={() => addToCart(product)}
+                  onClick={() => {
+                    addToCart(product);
+                    showToast(`${product.title} added to your cart.`, 'success');
+                  }}
                   className="w-full bg-orange-600 border border-transparent rounded-lg py-4 px-8 flex items-center justify-center text-lg font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 shadow-md transition-colors"
                 >
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -2,12 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCartStore } from '../store/cartStore';
 import { FaTrash, FaArrowRight } from 'react-icons/fa6';
+import { useToast } from '../components/ui/Toast';
 
 const Cart = () => {
   // Access state and actions from Zustand store
   const cartItems = useCartStore((state) => state.cartItems);
   const removeFromCart = useCartStore((state) => state.removeFromCart);
   const getTotalPrice = useCartStore((state) => state.getTotalPrice);
+  const { showToast } = useToast();
   
   // We can reuse addToCart to increase quantity, but for a full implementation, 
   // you might want to add specific increase/decrease actions to your store later.
@@ -85,7 +87,10 @@ const Cart = () => {
                         <div className="absolute top-0 right-0 sm:relative sm:ml-auto">
                           <button
                             type="button"
-                            onClick={() => removeFromCart(item.id)}
+                            onClick={() => {
+                              removeFromCart(item.id);
+                              showToast(`${item.title} removed from your cart.`, 'info');
+                            }}
                             className="-m-2 p-2 inline-flex text-gray-400 hover:text-red-500 transition-colors"
                           >
                             <span className="sr-only">Remove</span>
